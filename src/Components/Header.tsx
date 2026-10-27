@@ -5,6 +5,7 @@ import Link from "next/link";
 const Header = () => {
     return (
         <div className="container mx-auto flex justify-between items-center mt-2">
+            <Link href='/'>
             <div className="flex items-center gap-2">
 
                 <div className="bg-[#05893E] rounded-lg inline-flex ">
@@ -18,7 +19,7 @@ const Header = () => {
                     <p><BanglaData></BanglaData></p>
                 </div>
             </div>
-
+            </Link>
             <div className="flex items-center gap-4">
                 <Link href={'/signin'}> <button className="btn btn-ghost text-neutral-700 transition-colors hover:text-[#05893E] font-bold">সাইন ইন</button>
                 </Link>

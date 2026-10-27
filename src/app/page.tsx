@@ -1,6 +1,7 @@
 import BanglaData from "@/Components/BanglaDate";
 import HomeCard from "@/Components/HomeCard";
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function Home() {
   const resData = await fetch('https://openapi.programming-hero.com/api/bazardor/products')
@@ -123,7 +124,6 @@ export default async function Home() {
                 return (
 
                   <HomeCard key={datas.id} datas={datas}></HomeCard>
-
 
                 )
               })

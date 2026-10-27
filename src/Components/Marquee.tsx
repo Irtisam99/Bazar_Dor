@@ -1,3 +1,4 @@
+import Link from "next/link";
 import MarqueeText from "react-marquee-text";
 import "react-marquee-text/dist/styles.css";
 
@@ -59,9 +60,10 @@ const Marquee = async () => {
         <div className="mt-4 border-y border-gray-200 py-2">
             <MarqueeText direction="right" duration={10}>
                 {data.map((datas) => (
+                    <Link key={datas.id} href={`/product/${datas.id}`}>
                     <div
                         key={datas.id}
-                        className="mr-10 inline-flex items-center gap-1.5"
+                        className="mr-10 inline-flex items-center gap-1.5 hover:underline"
                     >
                         <p>{datas.image}</p>
 
@@ -101,6 +103,7 @@ const Marquee = async () => {
                             }
                         </span>
                     </div>
+                    </Link>
                 ))}
             </MarqueeText>
         </div>

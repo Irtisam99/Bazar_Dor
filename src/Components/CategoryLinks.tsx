@@ -1,28 +1,23 @@
-import Image from "next/image";
-import Link from "next/link";
+import CategoryLinkItem from "./CategoryLinkItem";
+
+interface CategoryType {
+    id: number;
+    icon: string;
+    nameBn: string;
+}
 
 const CategoryLinks = async () => {
-    const resData = await fetch('https://openapi.programming-hero.com/api/bazardor/categories')
-    const cateData = await resData.json()
+    const resData = await fetch(
+        "https://openapi.programming-hero.com/api/bazardor/categories"
+    );
 
+    const cateData: CategoryType[] = await resData.json();
 
     return (
-
-        <div className="container mx-auto flex gap-7 mt-5 pl-4">
-            
-            {
-                cateData.map((data) => {
-
-                    return (
-                       <Link key={data.id} href={`/category/${data.id}`}>
-                        <div key={data.id} className="flex gap-2">
-                            <p>{data.icon}</p>
-                            <p className="font-bold text-[14px]">{data.nameBn}</p>
-                        </div>
-                        </Link>
-                    )
-                })
-            }
+        <div className="container mx-auto flex flex-wrap items-center gap-3 mt-5 pl-4">
+            {cateData.map((data) => (
+                <CategoryLinkItem key={data.id} data={data} />
+            ))}
         </div>
     );
 };

@@ -1,6 +1,7 @@
 
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 // Product Type
@@ -110,6 +111,7 @@ const Category_Details = ({ data = [] }: CategoryDetailsProps) => {
                 <div className="grid grid-cols-1 gap-[18px] md:grid-cols-2 lg:grid-cols-3">
 
                     {sortedProducts.map((product) => (
+                        <Link key={product.id} href={`/product/${product.id}`}>
                         <div
                             key={product.id}
                             className="flex min-h-[148px] flex-col justify-between rounded-2xl border border-[#DFE8DF] bg-white/75 p-[18px] transition-all duration-200 hover:shadow-md"
@@ -169,6 +171,7 @@ const Category_Details = ({ data = [] }: CategoryDetailsProps) => {
 
                             </div>
                         </div>
+                        </Link>
                     ))}
 
                 </div>
