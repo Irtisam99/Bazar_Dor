@@ -84,6 +84,9 @@ const UserInfo = () => {
                 </Link>
             </div>
         );
+
+        console.log("Session user:", session?.user);
+console.log("Google image:", session?.user?.image);
     }
 
     // User signed in

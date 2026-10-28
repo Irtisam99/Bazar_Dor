@@ -36,7 +36,18 @@ const SignIn = () => {
             console.error("Unexpected sign-in error:", error);
             alert("Something went wrong. Please try again.");
         }
+
     };
+    const handleGoogleSignIn = async () => {
+        const data = await authClient.signIn.social({
+            provider: "google",
+        });
+    }
+    const handleGithubSignIn = async () => {
+        const data = await authClient.signIn.social({
+            provider: "github",
+        });
+    }
     return (
         <div className="min-h-screen bg-[#f1f5f0] px-4 py-5">
             <div className="mx-auto w-full max-w-[450px] mt-4">
@@ -102,6 +113,7 @@ const SignIn = () => {
                     {/* Social buttons */}
                     <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                         <button
+                            onClick={handleGoogleSignIn}
                             type="button"
                             className="flex items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white px-3 py-2.5 text-sm font-semibold text-gray-900 transition hover:bg-gray-50"
                         >
@@ -115,6 +127,7 @@ const SignIn = () => {
                         </button>
 
                         <button
+                            onClick={handleGithubSignIn}
                             type="button"
                             className="flex items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white px-3 py-2.5 text-sm font-semibold text-gray-900 transition hover:bg-gray-50"
                         >
