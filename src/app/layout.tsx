@@ -4,9 +4,10 @@ import "./globals.css";
 import Header from "@/Components/Header";
 import CategoryLinks from "@/Components/CategoryLinks";
 import Marquee from "@/Components/Marquee";
+import { Toaster } from "react-hot-toast";
 
 const banglaSerif = Noto_Serif_Bengali({
-  subsets: ['bengali','latin'],
+  subsets: ['bengali', 'latin'],
   display: "swap",
 });
 
@@ -28,7 +29,36 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <CategoryLinks></CategoryLinks>
         <Marquee></Marquee>
         {children}
-        
+
+
+        <Toaster
+          position="top-center"
+          reverseOrder={false}
+          toastOptions={{
+            duration: 3000,
+            style: {
+              background: "#FFFFFF",
+              color: "#202B22",
+              border: "1px solid #DFE8DF",
+              borderRadius: "12px",
+              padding: "14px 18px",
+              fontSize: "14px",
+              fontWeight: 500,
+            },
+            success: {
+              iconTheme: {
+                primary: "#05893E",
+                secondary: "#FFFFFF",
+              },
+            },
+            error: {
+              iconTheme: {
+                primary: "#EF4444",
+                secondary: "#FFFFFF",
+              },
+            },
+          }}
+        />
       </body>
     </html>
   );

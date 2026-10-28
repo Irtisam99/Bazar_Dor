@@ -32,6 +32,7 @@ interface ProductType {
 
 interface CategoryDetailsProps {
     data: ProductType[];
+    
 }
 
 const Category_Details = ({ data = [] }: CategoryDetailsProps) => {

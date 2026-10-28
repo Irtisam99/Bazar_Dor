@@ -37,7 +37,7 @@ export default async function Home() {
             <p className="bg-[#e1f0e7] w-fit rounded-2xl px-4 py-1 text-[#05893E] font-semibold"><BanglaData></BanglaData></p>
             <h1 className="font-bold text-[36px]">আজকের বাজারের দাম এক নজরে</h1>
             <p className="text-[16px] text-[#5f6761]">চাল, ডাল, তেল, সবজি, মাছ, মাংস, ডিম ও মসলার দাম — বাজারভিত্তিক বিস্তারিত, গড়, সর্বনিম্ন- <br></br>সর্বাধিক এবং দামের পরিবর্তন এক জায়গায়।</p>
-            <button className="w-fit bg-[#05893E] text-white px-4 py-2 rounded-lg font-bold mt-4">সব পণ্য দেখুন</button>
+            <a href='#shob-ponno'><button className="w-fit bg-[#05893E] text-white px-4 py-2 rounded-lg font-bold mt-4">সব পণ্য দেখুন</button></a>
           </div>
 
           <div className="mr-10">
@@ -109,7 +109,7 @@ export default async function Home() {
 
 
 
-      <div className="container mx-auto mt-10">
+      <div id='shob-ponno' className="container mx-auto mt-10">
         <div>
           <h3 className="text-[25px] font-bold">
 

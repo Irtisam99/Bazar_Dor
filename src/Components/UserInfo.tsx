@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { LogOut, UserRound, ChevronDown } from "lucide-react";
+import toast from "react-hot-toast";
 
 const UserInfo = () => {
     const { data: session, isPending } = authClient.useSession();
@@ -37,11 +38,13 @@ const UserInfo = () => {
         };
     }, []);
 
-    // Sign Out
-    const handleSignOut = async () => {
-        try {
-            setIsSigningOut(true);
 
+    const handleSignOut = async () => {
+        setIsSigningOut(true);
+
+        const toastId = toast.loading("সাইন আউট হচ্ছে...");
+
+        try {
             const { error } = await authClient.signOut();
 
             if (error) {
@@ -49,14 +52,24 @@ const UserInfo = () => {
             }
 
             setIsOpen(false);
+
+            toast.success("সফলভাবে সাইন আউট হয়েছে!", {
+                id: toastId,
+            });
+
             router.push("/");
             router.refresh();
         } catch (error) {
             console.error("Sign out error:", error);
+
+            toast.error("সাইন আউট করা যায়নি", {
+                id: toastId,
+            });
         } finally {
             setIsSigningOut(false);
         }
     };
+
 
     // Prevent sign-in buttons flashing while loading session
     if (isPending) {
@@ -86,7 +99,7 @@ const UserInfo = () => {
         );
 
         console.log("Session user:", session?.user);
-console.log("Google image:", session?.user?.image);
+        console.log("Google image:", session?.user?.image);
     }
 
     // User signed in

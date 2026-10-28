@@ -4,12 +4,14 @@
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const inputClass =
     "w-full rounded-lg border border-gray-200 bg-white px-3 py-2.5 text-sm text-gray-800 placeholder-gray-500 outline-none transition focus:border-green-600 focus:ring-2 focus:ring-green-600/20";
 
 const SignUp = () => {
-    const router=useRouter()
+    const router = useRouter()
+
     const handleSubmitHandler = async (
         e: React.FormEvent<HTMLFormElement>
     ) => {
@@ -17,41 +19,58 @@ const SignUp = () => {
 
         const formData = new FormData(e.currentTarget);
 
-        const name = String(formData.get("name") ?? "");
-        const email = String(formData.get("email") ?? "");
+        const name = String(formData.get("name") ?? "").trim();
+        const email = String(formData.get("email") ?? "").trim();
         const password = String(formData.get("password") ?? "");
         const confirmPassword = String(
             formData.get("confirmPassword") ?? ""
         );
 
-        if (password !== confirmPassword) {
-            alert("Passwords do not match!");
+        if (!name || !email || !password) {
+            toast.error("সবগুলো তথ্য পূরণ করুন");
             return;
         }
 
+        if (password.length < 8) {
+            toast.error("পাসওয়ার্ড কমপক্ষে ৮ অক্ষরের হতে হবে");
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            toast.error("পাসওয়ার্ড দুটি মিলছে না");
+            return;
+        }
+
+        const toastId = toast.loading("অ্যাকাউন্ট তৈরি হচ্ছে...");
+
         try {
-            const { data, error } = await authClient.signUp.email({
+            const { error } = await authClient.signUp.email({
                 name,
                 email,
                 password,
-                image:"/images.jpeg",
                 callbackURL: "/",
             });
 
             if (error) {
-                console.error("Sign-up error:", error);
-                alert(error.message || "Sign-up failed. Please try again.");
+                toast.error(
+                    error.message || "অ্যাকাউন্ট তৈরি করা যায়নি",
+                    { id: toastId }
+                );
                 return;
             }
 
-            console.log("Sign-up successful:", data);
-            router.push("/")
-        } catch (error) {
-            console.error("Unexpected sign-up error:", error);
-            alert("Something went wrong. Please try again.");
-        }
+            toast.success("অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে!", {
+                id: toastId,
+            });
 
-        
+            router.push("/");
+        } catch (error) {
+            console.error("Sign-up error:", error);
+
+            toast.error("কিছু একটা সমস্যা হয়েছে", {
+                id: toastId,
+            });
+        }
     };
 
 
