@@ -34,6 +34,7 @@ const SignUp = () => {
                 name,
                 email,
                 password,
+                image:"/images.jpeg",
                 callbackURL: "/",
             });
 

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import BanglaData from "./BanglaDate";
 import Link from "next/link";
+import UserInfo from "./UserInfo";
 
 const Header = () => {
     return (
@@ -20,13 +21,11 @@ const Header = () => {
                 </div>
             </div>
             </Link>
-            <div className="flex items-center gap-4">
-                <Link href={'/signin'}> <button className="btn btn-ghost text-neutral-700 transition-colors hover:text-[#05893E] font-bold">সাইন ইন</button>
-                </Link>
-                <Link href={'/signup'}> <button className="btn bg-[#05893E] px-3 py-2 font-semibold text-white transition-colors hover:bg-[#057636] rounded-xl">সাইন আপ</button>
-                </Link>
-            </div>
+            
+            <UserInfo></UserInfo>
+
         </div>
+
     );
 };
 
