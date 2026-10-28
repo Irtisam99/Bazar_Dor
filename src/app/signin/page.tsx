@@ -1,9 +1,42 @@
+'use client';
+import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 
 const inputClass =
     "w-full rounded-lg border border-gray-200 bg-white px-3 py-2.5 text-sm text-gray-800 placeholder-gray-500 outline-none transition focus:border-green-600 focus:ring-2 focus:ring-green-600/20";
 
 const SignIn = () => {
+
+    const handleSubmitHandler = async (
+        e: React.FormEvent<HTMLFormElement>
+    ) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.currentTarget);
+
+        const email = String(formData.get("email") ?? "");
+        const password = String(formData.get("password") ?? "");
+
+
+        try {
+            const { data, error } = await authClient.signIn.email({
+                email,
+                password,
+                callbackURL: "/",
+            });
+
+            if (error) {
+                console.error("Sign-In error:", error);
+                alert(error.message || "Sign-In failed. Please try again.");
+                return;
+            }
+
+            console.log("Sign-In successful:", data);
+        } catch (error) {
+            console.error("Unexpected sign-in error:", error);
+            alert("Something went wrong. Please try again.");
+        }
+    };
     return (
         <div className="min-h-screen bg-[#f1f5f0] px-4 py-5">
             <div className="mx-auto w-full max-w-[450px] mt-4">
@@ -19,7 +52,7 @@ const SignIn = () => {
 
                 {/* Card */}
                 <div className="rounded-2xl border border-gray-200 bg-[#fafbf9] p-5 shadow-sm">
-                    <form className="space-y-3">
+                    <form className="space-y-3" onSubmit={handleSubmitHandler}>
                         <div>
                             <label htmlFor="email" className="mb-1 block text-sm font-medium text-gray-900">
                                 ইমেইল
