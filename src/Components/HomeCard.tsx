@@ -1,7 +1,7 @@
 import Link from "next/link";
 
-const convertUnitToBangla = (unit) => {
-    const units = {
+const convertUnitToBangla = (unit: string) => {
+    const units: Record<string, string> = {
         kg: "কেজি",
         gm: "গ্রাম",
         g: "গ্রাম",
@@ -21,7 +21,26 @@ const convertUnitToBangla = (unit) => {
     return units[String(unit).trim().toLowerCase()] || unit;
 };
 
-const HomeCard = ({ datas }) => {
+interface ProductType {
+    id: number;
+    slug: string;
+    nameBn: string;
+    category: string;
+    categoryNameBn: string;
+    categoryIcon: string;
+    unit: string;
+    image: string;
+    today: number;
+    yesterday: number;
+    lastWeek: number;
+    lastMonth: number;
+    change: {
+        dir: "up" | "down" | "flat";
+        pct: number;
+    };
+}
+
+const HomeCard = ({ datas }: { datas: ProductType }) => {
     return (
         <Link key={datas.id} href={`/product/${datas.id}`}>
 
@@ -75,8 +94,8 @@ const HomeCard = ({ datas }) => {
                     </div>
                 </div>
             </div>
-            </Link>
-            );
+        </Link>
+    );
 };
 
-            export default HomeCard;
+export default HomeCard;

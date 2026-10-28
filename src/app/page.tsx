@@ -3,10 +3,35 @@ import HomeCard from "@/Components/HomeCard";
 import Image from "next/image";
 import Link from "next/link";
 
+interface ProductType {
+  id: number;
+  slug: string;
+  nameBn: string;
+  category: string;
+  categoryNameBn: string;
+  categoryIcon: string;
+  unit: string;
+  image: string;
+  today: number;
+  yesterday: number;
+  lastWeek: number;
+  lastMonth: number;
+  change: {
+    dir: "up" | "down" | "flat";
+    pct: number;
+  };
+  markets: {
+    market: string;
+    division: string;
+    min: number;
+    max: number;
+  }[];
+}
+
+
 export default async function Home() {
   const resData = await fetch('https://openapi.programming-hero.com/api/bazardor/products')
-  const data = await resData.json()
-
+  const data: ProductType[] = await resData.json();
 
   const upData = [...data].filter((datas) => {
     return (
@@ -113,11 +138,11 @@ export default async function Home() {
         <div>
           <h3 className="text-[25px] font-bold">
 
-            সব পণ্য         
-           </h3>
-           <p className="mb-4">মোট {Number(data.length).toLocaleString("bn-BD")}টি পণ্য দেখানো হচ্ছে</p>
+            সব পণ্য
+          </h3>
+          <p className="mb-4">মোট {Number(data.length).toLocaleString("bn-BD")}টি পণ্য দেখানো হচ্ছে</p>
 
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3 mb-6">
 
             {
               data.map((datas) => {

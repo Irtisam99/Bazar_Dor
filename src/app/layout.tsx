@@ -5,6 +5,7 @@ import Header from "@/Components/Header";
 import CategoryLinks from "@/Components/CategoryLinks";
 import Marquee from "@/Components/Marquee";
 import { Toaster } from "react-hot-toast";
+import Footer from "@/Components/Footer";
 
 const banglaSerif = Noto_Serif_Bengali({
   subsets: ['bengali', 'latin'],
@@ -29,7 +30,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <CategoryLinks></CategoryLinks>
         <Marquee></Marquee>
         {children}
-
+        <Footer></Footer>
 
         <Toaster
           position="top-center"

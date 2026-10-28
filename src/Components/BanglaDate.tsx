@@ -1,19 +1,19 @@
+
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const BanglaData = () => {
-    const [date, setDate] = useState("");
+    const [date] = useState(() => {
+        return new Intl.DateTimeFormat("bn-BD", {
+            timeZone: "Asia/Dhaka",
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+        }).format(new Date());
+    });
 
-    useEffect(() => {
-        const formattedDate = new Date().toLocaleDateString("bn-BD", {
-            dateStyle: "full",
-        });
-
-        setDate(formattedDate);
-    }, []);
-
-    return <span>{date || "\u00A0"}</span>;
+    return <span>{date}</span>;
 };
 
 export default BanglaData;
